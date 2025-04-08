@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Learning Hub</title>
+    
+    <!-- Bootstrap 5 CSS (Replit-themed) -->
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) library CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <!-- Highlight.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    
+    <!-- Inline CSS -->
+    <style>
+        /* Main styles for HTML Learning Hub */
+
+        /* Custom variables */
+        :root {
+            --code-bg: #282c34;
+            --tag-color: #61dafb;
+            --attribute-color: #e06c75;
+            --value-color: #98c379;
+        }
+
+        /* General styles */
+        body {
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .section-title {
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--bs-primary);
+        }
+
+        /* Hero section */
+        #hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background-color: var(--bs-dark);
+            position: relative;
+        }
+
+        .animated-title {
+            position: relative;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px rgba(33, 37, 41, 0.8), 0 0 10px rgba(33, 37, 41, 0.5);
+            }
+            to {
+                text-shadow: 0 0 10px rgba(13, 110, 253, 0.8), 0 0 20px rgba(13, 110, 253, 0.5);
+            }
+        }
+
+        .html-tags-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* HTML Demo Card */
+        .html-demo-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .browser-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .browser-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .browser-dot.red {
+            background-color: #ff5f56;
+        }
+
+        .browser-dot.yellow {
+            background-color: #ffbd2e;
+        }
+
+        .browser-dot.green {
+            background-color: #27c93f;
+        }
+
+        /* Structure diagram */
+        .html-structure-diagram {
+            padding: 2rem;
+            background-color: var(--bs-dark);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .document-outline {
+            padding: 1rem;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .html-tag {
+            padding: 0.5rem;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.05);
+            margin-bottom: 0.5rem;
+        }
+
+        .html-tag.nested {
+            margin-left: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid var(--bs-primary);
+            margin-top: 0.5rem;
+        }
+
+        .tag-label {
+            font-family: monospace;
+            color: var(--tag-color);
+        }
+
+        /* Element cards */
+        .element-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .element-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .element-card .card-title {
+            color: var(--bs-primary);
+        }
+
+        .element-card code {
+            background-color: var(--code-bg);
+            color: var(--tag-color);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+
+        /* Element demonstration area */
+        .element-demo-container {
+            background-color: var(--bs-dark);
+            position: relative;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .demo-title {
+            position: relative;
+            color: var(--bs-light);
+        }
+
+        .demo-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--bs-primary);
+        }
+
+        .element-demo-area {
+            background-color: var(--bs-light);
+            padding: 1.5rem;
+            border-radius: 6px;
+            height: 300px;
+            overflow-y: auto;
+            color: var(--bs-dark);
+        }
+
+        .code-preview {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background-color: #343a40;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            font-family: monospace;
+        }
+
+        .code-preview pre {
+            margin: 0;
+            height: calc(100% - 36px);
+            overflow-y: auto;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        /* Forms section */
+        .form-elements-list code {
+            background-color: var(--code-bg);
+            color: var(--tag-color);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+
+        .form-demo-card {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Semantic HTML section */
+        .semantic-comparison .card {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border: none;
+            margin-bottom: 1rem;
+        }
+
+        .semantic-layout-diagram {
+            padding: 2rem;
+            background-color: var(--bs-dark);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            color: white;
+            margin-top: 2rem;
+        }
+
+        .semantic-container {
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .semantic-element {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .semantic-element.header, 
+        .semantic-element.footer {
+            background-color: rgba(13, 110, 253, 0.2);
+        }
+
+        .semantic-element.nav, 
+        .semantic-element.aside {
+            background-color: rgba(220, 53, 69, 0.2);
+            height: 100%;
+        }
+
+        .semantic-element.main {
+            background-color: rgba(25, 135, 84, 0.2);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .semantic-element.section, 
+        .semantic-element.article {
+            background-color: rgba(255, 193, 7, 0.2);
+            margin: 0.5rem 0;
+        }
+
+        .element-label {
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--tag-color);
+        }
+
+        .element-description {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .semantic-body {
+            margin-bottom: 1rem;
+        }
+
+        /* Media placeholders */
+        .iframe-placeholder {
+            border: 2px dashed var(--bs-secondary);
+            border-radius: 4px;
+            padding: 1.5rem;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .iframe-content {
+            text-align: center;
+            color: var(--bs-secondary);
+        }
+
+        /* Animations */
+        .animated-link {
+            position: relative;
+            text-decoration: none;
+            color: var(--bs-primary);
+            transition: color 0.3s;
+        }
+
+        .animated-link::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--bs-primary);
+            transition: width 0.3s;
+        }
+
+        .animated-link:hover {
+            color: var(--bs-primary);
+        }
+
+        .animated-link:hover::before {
+            width: 100%;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .semantic-body .col-md-3,
+            .semantic-body .col-md-6 {
+                margin-bottom: 1rem;
+            }
+            
+            .element-demo-area, 
+            .code-preview {
+                height: auto;
+                margin-bottom: 1rem;
+            }
+            
+            .semantic-comparison .col-md-6 {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Float animation for tags */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(20px) rotate(5deg);
+            }
+        }
+
+        .floating-tag {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2);
+            font-family: monospace;
+            animation: float 15s ease-in-out infinite;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-code"></i> HTML Learning Hub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#intro">Introduction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#structure">Structure</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#elements">Elements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#forms">Forms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#semantic">Semantic HTML</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="py-5 text-center position-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1 class="display-4 mb-4 animated-title">Learn <span class="text-primary">&lt;HTML&gt;</span></h1>
+                        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="200">
+                            An interactive guide to HyperText Markup Language - the building blocks of the web
+                        </p>
+                        <div data-aos="fade-up" data-aos-delay="400">
+                            <a href="#intro" class="btn btn-outline-light btn-lg px-4 me-2">Get Started</a>
+                            <a href="#elements" class="btn btn-primary btn-lg px-4">Explore Elements</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Animated HTML tags background -->
+            <div class="html-tags-bg"></div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="intro" class="py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <h2 class="section-title">What is HTML?</h2>
+                        <p class="lead">HTML (HyperText Markup Language) is the standard markup language for documents designed to be displayed in a web browser.</p>
+                        <p>HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.</p>
+                        <p>With HTML, you can create structured documents by denoting structural semantics for text such as headings, paragraphs, lists, links, quotes, and other items.</p>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <div class="card html-demo-card">
+                            <div class="card-header d-flex align-items-center">
+                                <div class="browser-dots">
+                                    <span class="browser-dot red"></span>
+                                    <span class="browser-dot yellow"></span>
+                                    <span class="browser-dot green"></span>
+                                </div>
+                                <span class="ms-2">index.html</span>
+                            </div>
+                            <div class="card-body">
+                                <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My First HTML Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first HTML page.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HTML Structure Section -->
+        <section id="structure" class="py-5 bg-dark">
+            <div class="container">
+                <h2 class="section-title text-center mb-5" data-aos="fade-up">HTML Document Structure</h2>
+                
+                <div class="html-structure-diagram" data-aos="zoom-in">
+                    <div class="document-outline">
+                        <div class="html-tag">
+                            <div class="tag-label">&lt;!DOCTYPE html&gt;</div>
+                            <div class="html-tag nested">
+                                <div class="tag-label">&lt;html&gt;</div>
+                                <div class="html-tag nested">
+                                    <div class="tag-label">&lt;head&gt;</div>
+                                    <div class="html-tag nested">
+                                        <div class="tag-label">&lt;title&gt;Page Title&lt;/title&gt;</div>
+                                    </div>
+                                    <div class="html-tag nested">
+                                        <div class="tag-label">&lt;meta&gt; tags</div>
+                                    </div>
+                                    <div class="html-tag nested">
+                                        <div class="tag-label">&lt;link&gt; CSS files</div>
+                                    </div>
+                                    <div class="html-tag nested">
+                                        <div class="tag-label">&lt;script&gt; JavaScript files&lt;/script&gt;</div>
+                                    </div>
+                                </div>
+                                <div class="html-tag nested">
+                                    <div class="tag-label">&lt;body&gt;</div>
+                                    <div class="html-tag nested">
+                                        <div class="tag-label">&lt;header&gt;</div>
+                                    </div>
+                                    <div class="html-tag nested">
+                                        <div class="tag-label">&lt;nav&gt;</div>
+                                    </div>
+                                    <div class="html-tag nested">
+                                        <div class="tag-label">&lt;main&gt;</div>
+                                    </div>
+                                    <div class="html-tag nested">
+                                        <div class="tag-label">&lt;footer&gt;</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-5">
+                    <div class="col-md-6" data-aos="fade-right">
+                        <h3>Document Type Declaration</h3>
+                        <p>All HTML documents must start with a document type declaration: <code>&lt;!DOCTYPE html&gt;</code>. This helps browsers understand what type of document they're dealing with.</p>
+                        
+                        <h3>The HTML Element</h3>
+                        <p>The <code>&lt;html&gt;</code> element is the root element of an HTML page and contains all other HTML elements (except for the DOCTYPE).</p>
+                        
+                        <h3>The Head Section</h3>
+                        <p>The <code>&lt;head&gt;</code> element contains meta information about the HTML document that isn't displayed on the page, such as the title, character encoding, styles, scripts, and more.</p>
+                    </div>
+                    <div class="col-md-6" data-aos="fade-left">
+                        <h3>The Body Section</h3>
+                        <p>The <code>&lt;body&gt;</code> element contains all the content that is shown to users, such as headings, paragraphs, images, hyperlinks, tables, lists, etc.</p>
+                        
+                        <h3>Semantic Structure</h3>
+                        <p>Modern HTML5 includes semantic elements like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code> that give meaning to different parts of the page.</p>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> Proper HTML structure improves accessibility, SEO, and maintainability of your website.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HTML Elements Section -->
+        <section id="elements" class="py-5">
+            <div class="container">
+                <h2 class="section-title text-center mb-5" data-aos="fade-up">HTML Elements</h2>
+                
+                <div class="row">
+                    <div class="col-lg-4 mb-4" data-aos="flip-up" data-aos-delay="100">
+                        <div class="card h-100 element-card">
+                            <div class="card-body">
+                                <h3 class="card-title">Text Elements</h3>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;h1&gt;-&lt;h6&gt;</code>
+                                        <span>Headings</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;p&gt;</code>
+                                        <span>Paragraph</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;em&gt;</code>
+                                        <span>Emphasized text</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;strong&gt;</code>
+                                        <span>Important text</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;span&gt;</code>
+                                        <span>Inline container</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-sm btn-outline-primary element-demo-btn" data-element-type="text">
+                                    See in action
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 mb-4" data-aos="flip-up" data-aos-delay="200">
+                        <div class="card h-100 element-card">
+                            <div class="card-body">
+                                <h3 class="card-title">List Elements</h3>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;ul&gt;</code>
+                                        <span>Unordered List</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;ol&gt;</code>
+                                        <span>Ordered List</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;li&gt;</code>
+                                        <span>List Item</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;dl&gt;</code>
+                                        <span>Description List</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;dt&gt; &lt;dd&gt;</code>
+                                        <span>Term & Description</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-sm btn-outline-primary element-demo-btn" data-element-type="list">
+                                    See in action
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 mb-4" data-aos="flip-up" data-aos-delay="300">
+                        <div class="card h-100 element-card">
+                            <div class="card-body">
+                                <h3 class="card-title">Link & Media Elements</h3>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;a&gt;</code>
+                                        <span>Hyperlink</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;img&gt;</code>
+                                        <span>Image</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;video&gt;</code>
+                                        <span>Video</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;audio&gt;</code>
+                                        <span>Audio</span>
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <code class="me-3">&lt;iframe&gt;</code>
+                                        <span>Inline Frame</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-sm btn-outline-primary element-demo-btn" data-element-type="media">
+                                    See in action
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Element Demonstration Area -->
+                <div class="element-demo-container mt-5 p-4 border rounded" data-aos="fade-up">
+                    <h3 class="demo-title text-center mb-4">Element Demonstration</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="element-demo-area">
+                                <div id="text-demo" class="demo-content">
+                                    <h1>This is a Heading 1</h1>
+                                    <h2>This is a Heading 2</h2>
+                                    <p>This is a paragraph of text. You can make text <em>emphasized</em> or <strong>important</strong>.</p>
+                                    <p>Use <span class="text-primary">span</span> to style inline text.</p>
+                                </div>
+                                <div id="list-demo" class="demo-content d-none">
+                                    <h3>Unordered List</h3>
+                                    <ul>
+                                        <li>Item 1</li>
+                                        <li>Item 2</li>
+                                        <li>Item 3</li>
+                                    </ul>
+                                    
+                                    <h3>Ordered List</h3>
+                                    <ol>
+                                        <li>First item</li>
+                                        <li>Second item</li>
+                                        <li>Third item</li>
+                                    </ol>
+                                    
+                                    <h3>Description List</h3>
+                                    <dl>
+                                        <dt>HTML</dt>
+                                        <dd>HyperText Markup Language</dd>
+                                        <dt>CSS</dt>
+                                        <dd>Cascading Style Sheets</dd>
+                                    </dl>
+                                </div>
+                                <div id="media-demo" class="demo-content d-none">
+                                    <h3>Links</h3>
+                                    <p><a href="#" class="animated-link">This is a hyperlink</a></p>
+                                    
+                                    <h3>Images (represented as icons)</h3>
+                                    <div class="text-center">
+                                        <i class="fas fa-image fa-5x mb-3"></i>
+                                        <p>An &lt;img&gt; tag would display an image here</p>
+                                    </div>
+                                    
+                                    <h3>Iframe Example</h3>
+                                    <div class="iframe-placeholder">
+                                        <div class="iframe-content">
+                                            <i class="fas fa-code fa-3x mb-2"></i>
+                                            <p>An iframe would embed content here</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="code-preview">
+                                <div class="code-header">
+                                    <span>HTML Code</span>
+                                </div>
+                                <pre><code id="element-code" class="language-html">&lt;h1&gt;This is a Heading 1&lt;/h1&gt;
+&lt;h2&gt;This is a Heading 2&lt;/h2&gt;
+&lt;p&gt;This is a paragraph of text. You can make text &lt;em&gt;emphasized&lt;/em&gt; or &lt;strong&gt;important&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Use &lt;span class="text-primary"&gt;span&lt;/span&gt; to style inline text.&lt;/p&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forms Section -->
+        <section id="forms" class="py-5 bg-dark">
+            <div class="container">
+                <h2 class="section-title text-center mb-5" data-aos="fade-up">HTML Forms</h2>
+                
+                <div class="row align-items-center">
+                    <div class="col-lg-5" data-aos="fade-right">
+                        <h3>Form Elements</h3>
+                        <p>HTML forms are used to collect user input. The <code>&lt;form&gt;</code> element is a container for different types of input elements.</p>
+                        
+                        <ul class="list-group form-elements-list">
+                            <li class="list-group-item d-flex align-items-center">
+                                <code class="me-3">&lt;input&gt;</code>
+                                <span>Text, password, checkbox, radio, etc.</span>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <code class="me-3">&lt;textarea&gt;</code>
+                                <span>Multi-line text input</span>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <code class="me-3">&lt;select&gt;</code>
+                                <span>Dropdown list</span>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <code class="me-3">&lt;button&gt;</code>
+                                <span>Clickable button</span>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <code class="me-3">&lt;label&gt;</code>
+                                <span>Label for input elements</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="mt-4">
+                            <h3>Form Attributes</h3>
+                            <p>Important form attributes include:</p>
+                            <ul>
+                                <li><code>action</code>: Where to send the form data</li>
+                                <li><code>method</code>: HTTP method (GET or POST)</li>
+                                <li><code>enctype</code>: How form data is encoded</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-7" data-aos="fade-left">
+                        <div class="card form-demo-card">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0">Sample Contact Form</h4>
+                            </div>
+                            <div class="card-body">
+                                <form class="needs-validation" novalidate>
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your name.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email address.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="subject" class="form-label">Subject</label>
+                                        <select class="form-select" id="subject" required>
+                                            <option value="" selected disabled>Choose a subject</option>
+                                            <option value="general">General Inquiry</option>
+                                            <option value="support">Technical Support</option>
+                                            <option value="feedback">Feedback</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a subject.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message" class="form-label">Message</label>
+                                        <textarea class="form-control" id="message" rows="4" placeholder="Your message here..." required></textarea>
+                                        <div class="invalid-feedback">
+                                            Please enter your message.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="newsletter" checked>
+                                        <label class="form-check-label" for="newsletter">Subscribe to newsletter</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">This is a demo form. No data will be sent.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Semantic HTML Section -->
+        <section id="semantic" class="py-5">
+            <div class="container">
+                <h2 class="section-title text-center mb-5" data-aos="fade-up">Semantic HTML</h2>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6" data-aos="fade-right">
+                        <h3>Why Use Semantic HTML?</h3>
+                        <p>Semantic HTML uses tags that convey meaning about the structure and content of your web page, not just how it looks.</p>
+                        
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h4>Benefits of Semantic HTML:</h4>
+                                <ul>
+                                    <li>Improves accessibility for users with disabilities</li>
+                                    <li>Enhances SEO (Search Engine Optimization)</li>
+                                    <li>Makes code easier to understand and maintain</li>
+                                    <li>Provides consistent structure across web pages</li>
+                                    <li>Helps with responsive design</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" data-aos="fade-left">
+                        <div class="semantic-comparison">
+                            <h3>Non-Semantic vs. Semantic</h3>
+                            
+                            <div class="card mb-3">
+                                <div class="card-header bg-danger text-white">
+                                    <strong>Non-Semantic Approach</strong>
+                                </div>
+                                <div class="card-body">
+                                    <pre><code class="language-html">&lt;div class="header"&gt;
+    &lt;div class="navigation"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="main-content"&gt;
+    &lt;div class="article"&gt;...&lt;/div&gt;
+    &lt;div class="sidebar"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="footer"&gt;...&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-header bg-success text-white">
+                                    <strong>Semantic Approach</strong>
+                                </div>
+                                <div class="card-body">
+                                    <pre><code class="language-html">&lt;header&gt;
+    &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+    &lt;article&gt;...&lt;/article&gt;
+    &lt;aside&gt;...&lt;/aside&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Semantic Layout Diagram -->
+                <div class="semantic-layout-diagram" data-aos="zoom-in">
+                    <h3 class="text-center mb-4">Semantic HTML5 Page Structure </h3>
+                    
+                    <div class="semantic-container">
+                        <div class="semantic-element header">
+                            <div class="element-label">&lt;header&gt;</div>
+                            <div class="element-description">Page header with logo, title, navigation</div>
+                        </div>
+                        
+                        <div class="row semantic-body">
+                            <div class="col-md-3">
+                                <div class="semantic-element nav">
+                                    <div class="element-label">&lt;nav&gt;</div>
+                                    <div class="element-description">Navigation links</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="semantic-element main">
+                                    <div class="element-label">&lt;main&gt;</div>
+                                    <div class="semantic-element section">
+                                        <div class="element-label">&lt;section&gt;</div>
+                                        <div class="element-description">Grouped content</div>
+                                    </div>
+                                    <div class="semantic-element article">
+                                        <div class="element-label">&lt;article&gt;</div>
+                                        <div class="element-description">Independent, self-contained content</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="semantic-element aside">
+                                    <div class="element-label">&lt;aside&gt;</div>
+                                    <div class="element-description">Sidebar, related content</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="semantic-element footer">
+                            <div class="element-label">&lt;footer&gt;</div>
+                            <div class="element-description">Page footer with copyright, links, etc</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-5">
+                    <div class="col-md-12 text-center" data-aos="fade-up">
+                        <div class="alert alert-primary" role="alert">
+                            <h4><i class="fas fa-lightbulb"></i> Semantic HTML Best Practices:</h4>
+                            <p>Always use the most appropriate semantic element for the content's purpose, not its appearance. This improves accessibility and SEO.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5> Made by Khalil , Mouzawi and Maria </h5>
+                    <p>Your interactive guide to HTML</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Created with <i class="fas fa-heart text-danger"></i> using Bootstrap & AOS</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS (Animate On Scroll) library JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <!-- Highlight.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    
+    <!-- Inline JavaScript -->
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS (Animate on Scroll)
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Initialize Syntax Highlighting
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+            
+            console.log('HTML Learning Hub initialized');
+            
+            // Initialize Bootstrap tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+            
+            // Handle form validation
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+                        event.preventDefault();
+                        // Show success message
+                        form.innerHTML = `
+                            <div class="alert alert-success" role="alert">
+                                <h4 class="alert-heading">Form submitted successfully!</h4>
+                                <p>This is a demonstration form. In a real website, this data would be sent to a server.</p>
+                            </div>
+                        `;
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+            
+            // Element demo buttons
+            const demoBtns = document.querySelectorAll('.element-demo-btn');
+            const demoContents = document.querySelectorAll('.demo-content');
+            const codeElement = document.getElementById('element-code');
+            
+            // HTML code samples for each element type
+            const codeSamples = {
+                text: `&lt;h1&gt;This is a Heading 1&lt;/h1&gt;
+&lt;h2&gt;This is a Heading 2&lt;/h2&gt;
+&lt;p&gt;This is a paragraph of text. You can make text &lt;em&gt;emphasized&lt;/em&gt; or &lt;strong&gt;important&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Use &lt;span class="text-primary"&gt;span&lt;/span&gt; to style inline text.&lt;/p&gt;`,
+                
+                list: `&lt;h3&gt;Unordered List&lt;/h3&gt;
+&lt;ul&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+    &lt;li&gt;Item 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Ordered List&lt;/h3&gt;
+&lt;ol&gt;
+    &lt;li&gt;First item&lt;/li&gt;
+    &lt;li&gt;Second item&lt;/li&gt;
+    &lt;li&gt;Third item&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3&gt;Description List&lt;/h3&gt;
+&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
+    &lt;dt&gt;CSS&lt;/dt&gt;
+    &lt;dd&gt;Cascading Style Sheets&lt;/dd&gt;
+&lt;/dl&gt;`,
+                
+                media: `&lt;h3&gt;Links&lt;/h3&gt;
+&lt;p&gt;&lt;a href="#"&gt;This is a hyperlink&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;Images&lt;/h3&gt;
+&lt;img src="image.jpg" alt="Description of image"&gt;
+
+&lt;h3&gt;Iframe Example&lt;/h3&gt;
+&lt;iframe src="https://example.com" width="100%" height="150"&gt;&lt;/iframe&gt;`
+            };
+            
+            // Set up demo button click handlers
+            demoBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const elementType = this.dataset.elementType;
+                    
+                    // Hide all demo contents
+                    demoContents.forEach(content => {
+                        content.classList.add('d-none');
+                    });
+                    
+                    // Show selected demo content
+                    document.getElementById(`${elementType}-demo`).classList.remove('d-none');
+                    
+                    // Update code display
+                    codeElement.textContent = codeSamples[elementType];
+                    
+                    // Re-highlight the code
+                    hljs.highlightBlock(codeElement);
+                    
+                    // Update active button state
+                    demoBtns.forEach(b => b.classList.remove('btn-primary', 'btn-outline-primary'));
+                    demoBtns.forEach(b => b.classList.add('btn-outline-primary'));
+                    this.classList.remove('btn-outline-primary');
+                    this.classList.add('btn-primary');
+                });
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70, // Account for fixed navbar
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Update active nav item on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+                
+                let currentSectionId = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // Generate animated HTML tags background
+            const createHtmlTagsBackground = () => {
+                const container = document.querySelector('.html-tags-bg');
+                if (!container) return;
+                
+                const tags = [
+                    '&lt;html&gt;', '&lt;/html&gt;', 
+                    '&lt;head&gt;', '&lt;/head&gt;',
+                    '&lt;body&gt;', '&lt;/body&gt;',
+                    '&lt;div&gt;', '&lt;/div&gt;',
+                    '&lt;p&gt;', '&lt;/p&gt;',
+                    '&lt;h1&gt;', '&lt;/h1&gt;',
+                    '&lt;a&gt;', '&lt;/a&gt;',
+                    '&lt;img&gt;', 
+                    '&lt;ul&gt;', '&lt;/ul&gt;',
+                    '&lt;li&gt;', '&lt;/li&gt;',
+                    '&lt;span&gt;', '&lt;/span&gt;',
+                    '&lt;section&gt;', '&lt;/section&gt;',
+                    '&lt;article&gt;', '&lt;/article&gt;',
+                    '&lt;footer&gt;', '&lt;/footer&gt;'
+                ];
+                
+                // Create 50 tags with random positions
+                for (let i = 0; i < 50; i++) {
+                    const tag = document.createElement('div');
+                    tag.className = 'floating-tag';
+                    tag.innerHTML = tags[Math.floor(Math.random() * tags.length)];
+                    
+                    // Random positioning
+                    const xPos = Math.random() * 100;
+                    const yPos = Math.random() * 100;
+                    
+                    // Random size
+                    const size = Math.random() * 0.5 + 0.8; // between 0.8 and 1.3em
+                    
+                    // Random animation duration
+                    const duration = Math.random() * 20 + 10; // between 10 and 30s
+                    const delay = Math.random() * 5; // between 0 and 5s
+                    
+                    // Apply styles
+                    tag.style.cssText = `
+                        position: absolute;
+                        left: ${xPos}%;
+                        top: ${yPos}%;
+                        font-size: ${size}em;
+                        color: rgba(255, 255, 255, 0.2);
+                        font-family: monospace;
+                        animation: float ${duration}s ease-in-out ${delay}s infinite;
+                        transform: translateY(0);
+                    `;
+                    
+                    container.appendChild(tag);
+                }
+            };
+            
+            // Animate HTML structure diagram
+            const animateHtmlStructure = () => {
+                const diagram = document.querySelector('.html-structure-diagram');
+                if (!diagram) return;
+                
+                const tags = diagram.querySelectorAll('.html-tag');
+                
+                // Hover effect for structure diagram elements
+                tags.forEach(tag => {
+                    tag.addEventListener('mouseenter', function() {
+                        this.style.backgroundColor = 'rgba(13, 110, 253, 0.2)';
+                        this.style.transition = 'background-color 0.3s';
+                    });
+                    
+                    tag.addEventListener('mouseleave', function() {
+                        this.style.backgroundColor = this.classList.contains('nested') ? 'rgba(255, 255, 255, 0.03)' : 'rgba(255, 255, 255, 0.05)';
+                    });
+                });
+            };
+            
+            // Animate background elements
+            const animateBackgroundElements = () => {
+                const semanticElements = document.querySelectorAll('.semantic-element');
+                
+                semanticElements.forEach(element => {
+                    // Add a brief pulse animation
+                    element.style.transition = 'transform 0.5s, box-shadow 0.5s';
+                    element.style.transform = 'scale(1.03)';
+                    element.style.boxShadow = '0 0 10px rgba(255, 255, 255, 0.3)';
+                    
+                    setTimeout(() => {
+                        element.style.transform = 'scale(1)';
+                        element.style.boxShadow = 'none';
+                    }, 500);
+                });
+            };
+            
+            // Check if element is in viewport
+            const isElementInViewport = (el) => {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            };
+            
+            // Initialize animations and background elements
+            createHtmlTagsBackground();
+            animateHtmlStructure();
+            
+            // Animate background elements periodically
+            setInterval(animateBackgroundElements, 3000);
+            
+            // Create interactive hover effects for specific elements once they're in view
+            document.addEventListener('scroll', function() {
+                // Add animation to form elements when they come into view
+                const formElements = document.querySelectorAll('.form-elements-list .list-group-item');
+                
+                formElements.forEach((element, index) => {
+                    if (isElementInViewport(element)) {
+                        setTimeout(() => {
+                            element.style.transition = 'transform 0.3s, background-color 0.3s';
+                            
+                            element.addEventListener('mouseenter', function() {
+                                this.style.transform = 'translateX(10px)';
+                                this.style.backgroundColor = 'rgba(13, 110, 253, 0.1)';
+                            });
+                            
+                            element.addEventListener('mouseleave', function() {
+                                this.style.transform = 'translateX(0)';
+                                this.style.backgroundColor = '';
+                            });
+                        }, index * 100); // Staggered effect
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
